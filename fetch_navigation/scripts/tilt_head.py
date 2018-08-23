@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # Copyright (c) 2015 Fetch Robotics Inc.
-# Copyright (c) 2013-2014 Unbounded Robotics Inc. 
+# Copyright (c) 2013-2014 Unbounded Robotics Inc.
 # All right reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -12,8 +12,8 @@
 #   * Redistributions in binary form must reproduce the above copyright
 #     notice, this list of conditions and the following disclaimer in the
 #     documentation and/or other materials provided with the distribution.
-#   * Neither the name of Unbounded Robotics Inc. nor the names of its 
-#     contributors may be used to endorse or promote products derived 
+#   * Neither the name of Unbounded Robotics Inc. nor the names of its
+#     contributors may be used to endorse or promote products derived
 #     from this software without specific prior written permission.
 #
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
@@ -59,7 +59,7 @@ class NavHeadController:
         self.client = actionlib.SimpleActionClient("head_controller/point_head", PointHeadAction)
         self.client.wait_for_server()
 
-        self.plan_sub = rospy.Subscriber("move_base/TrajectoryPlannerROS/local_plan", Path, self.planCallback)
+        self.plan_sub = rospy.Subscriber("move_base/EBandPlannerROS/global_plan", Path, self.planCallback)
         self.stat_sub = rospy.Subscriber("move_base/status", GoalStatusArray, self.statCallback)
 
     def statCallback(self, msg):
