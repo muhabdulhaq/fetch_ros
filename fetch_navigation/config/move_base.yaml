@@ -1,7 +1,7 @@
 # Planner selection
 base_global_planner: "navfn/NavfnROS"
-# base_local_planner: "base_local_planner/TrajectoryPlannerROS"
-base_local_planner: "eband_local_planner/EBandPlannerROS"
+base_local_planner: "base_local_planner/TrajectoryPlannerROS"
+# base_local_planner: "eband_local_planner/EBandPlannerROS"
 
 # Recovery behaviors are defined in robot folders
 
@@ -24,46 +24,48 @@ NavfnROS:
 # Local planner
 controller_frequency: 25.0
 controller_patience: 15.0
-# TrajectoryPlannerROS:
-#   # base vel/accel profile is in robot folders
-#   # tolerances (defaults)
-#   yaw_goal_tolerance: 0.1
-#   xy_goal_tolerance: 0.1
-#   latch_xy_goal_tolerance: true
-#   # forward simulation
-#   sim_time: 1.0
-#   sim_granularity: 0.025
-#   angular_sim_granularity: 0.025
-#   vx_samples: 3
-#   vtheta_samples: 10
-#   # scoring (defaults)
-#   meter_scoring: true
-#   pdist_scale: 8.0
-#   gdist_scale: 12.0
-#   occdist_scale: 0.1
-#   heading_lookahead: 0.325
-#   heading_scoring_timestep: 0.8
-#   heading_scoring: true
-#   dwa: false
-#   # other
-#   oscillation_reset_dist: 0.05
-#   # debug
-#   publish_cost_grid_pc: false
-EBandPlannerROS:
-  xy_goal_tolerance: 0.1
+TrajectoryPlannerROS:
+  # base vel/accel profile is in robot folders
+  # tolerances (defaults)
   yaw_goal_tolerance: 0.1
-  rot_stopped_vel: 0.01
-  trans_stopped_vel: 0.01
-  min_in_place_vel_theta: 0.3
+  xy_goal_tolerance: 0.1
+  latch_xy_goal_tolerance: true
+  # forward simulation
+  sim_time: 1.0
+  sim_granularity: 0.025
+  angular_sim_granularity: 0.025
+  vx_samples: 3
+  vtheta_samples: 10
+  # scoring (defaults)
+  meter_scoring: true
+  pdist_scale: 8.0
+  gdist_scale: 12.0
+  occdist_scale: 0.1
+  heading_lookahead: 0.325
+  heading_scoring_timestep: 0.8
+  heading_scoring: true
+  dwa: false
+  # other
+  oscillation_reset_dist: 0.05
+  # debug
+  publish_cost_grid_pc: false
+# EBandPlannerROS:
+#   xy_goal_tolerance: 0.1
+#   yaw_goal_tolerance: 0.1
+#   rot_stopped_vel: 0.01
+#   trans_stopped_vel: 0.01
+#   min_in_place_vel_theta: 0.3
 
-  max_vel_lin: 1.0
-  max_vel_th: 1.5
-  min_vel_lin: 0.1
-  min_vel_th: 0.0
-  min_in_place_vel_theta: 0.0
-  in_place_trans_vel: 0.0
+#   max_vel_lin: 0.7
+#   max_vel_th: 0.5
+#   min_vel_lin: 0.1
+#   min_vel_th: 0.0
+#   min_in_place_vel_theta: 0.0
+#   in_place_trans_vel: 0.0
 
-  max_acceleration: 0.35
-  max_translational_acceleration: 0.35
-  max_rotational_acceleration: 0.8
-  differential_drive: true
+#   max_acceleration: 0.35
+#   max_translational_acceleration: 0.35
+#   max_rotational_acceleration: 0.8
+#   differential_drive: true
+
+#   eband_tiny_bubble_expansion: 0.001
