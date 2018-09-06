@@ -59,7 +59,20 @@ class NavHeadController:
         self.client = actionlib.SimpleActionClient("head_controller/point_head", PointHeadAction)
         self.client.wait_for_server()
 
-        self.plan_sub = rospy.Subscriber("move_base/EBandPlannerROS/global_plan", Path, self.planCallback)
+        local_planner = rospy.get_param("/move_base/base_local_planner")
+        if local_planner == "base_local_planner/TrajectoryPlannerROS":
+            self.plan_sub = rospy.Subscriber(
+                "move_base/TrajectoryPlannerROS/local_plan",
+                Path,
+                self.planCallback
+            )
+        elif local_planner == "eband_local_planner/EBandPlannerROS":
+            self.plan_sub = rospy.Subscriber(
+                "move_base/EBandPlannerROS/global_plan",
+                Path,
+                self.planCallback
+            )
+
         self.stat_sub = rospy.Subscriber("move_base/status", GoalStatusArray, self.statCallback)
 
     def statCallback(self, msg):
