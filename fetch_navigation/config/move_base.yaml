@@ -3,6 +3,7 @@
 base_global_planner: "global_planner/GlobalPlanner"
 # base_local_planner: "base_local_planner/TrajectoryPlannerROS"
 base_local_planner: "eband_local_planner/EBandPlannerROS"
+# base_local_planner: "teb_local_planner/TebLocalPlannerROS"
 
 # Recovery behaviors are defined in robot folders
 
@@ -11,7 +12,7 @@ oscillation_timeout: 10.0
 oscillation_distance: 0.5
 
 # Global planner
-planner_frequency: 0.5
+planner_frequency: 0.1
 planner_patience: 5.0
 NavfnROS:
   allow_unknown: true  # TODO: investigate this
@@ -61,13 +62,12 @@ EBandPlannerROS:
   yaw_goal_tolerance: 0.1
   rot_stopped_vel: 0.01
   trans_stopped_vel: 0.01
-  min_in_place_vel_theta: 0.3
 
   max_vel_lin: 0.75
   max_vel_th: 0.7
-  min_vel_lin: 0.3
-  min_vel_th: 0.4
-  min_in_place_vel_theta: 0.4
+  min_vel_lin: 0.1
+  min_vel_th: 0.0
+  min_in_place_vel_theta: 0.55
   in_place_trans_vel: 0.0
 
   max_acceleration: 0.5
@@ -76,9 +76,43 @@ EBandPlannerROS:
   differential_drive: true
 
   # virtual_mass: 0.1
-  k_prop: 4.0
-  k_damp: 3.5
+  k_prop: 1.0
+  k_damp: 5.0
   eband_min_relative_overlap: 0.7
-  eband_internal_force_gain: 1.0
+  eband_internal_force_gain: 0.1
+  eband_external_force_gain: 2.0
+  costmap_weight: 15.0
   bubble_velocity_multiplier: 2.0
-  rotation_threshold_multiplier: 0.5
+  rotation_threshold_multiplier: 1.0
+  rotation_correction_threshold: 0.5
+TebLocalPlannerROS:
+  xy_goal_tolerance: 0.1
+  yaw_goal_tolerance: 0.1
+  free_goal_vel: false
+
+  acc_lim_x: 0.5
+  acc_lim_theta: 1.5
+  max_vel_x: 0.75
+  max_vel_x_backwards: 0.001
+  max_vel_theta: 0.7
+
+  min_turning_radius: 0.0
+  wheelbase: 0.0
+  cmd_angle_instead_rotvel: false
+
+  footprint_model:
+    type: "point"
+    radius: 0.3
+
+  min_obstacle_dist: 0.8
+  costmap_obstacles_behind_robot_dist: 0.5
+  inflation_dist: 0.9
+
+  no_inner_iterations: 5
+  no_outer_iterations: 2
+  penalty_epsilon: 0.0
+  weight_max_vel_x: 1.0
+  weight_max_vel_theta: 2.0
+  weight_acc_lim_x: 1.0
+  weight_acc_lim_theta: 1.0
+  weight_kinematics_forward_drive: 5.0
