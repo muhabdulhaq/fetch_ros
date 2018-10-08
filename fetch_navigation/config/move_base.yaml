@@ -12,8 +12,9 @@ oscillation_timeout: 10.0
 oscillation_distance: 0.5
 
 # Global planner
-planner_frequency: 0.1
+planner_frequency: 0.0
 planner_patience: 5.0
+
 NavfnROS:
   allow_unknown: true  # TODO: investigate this
   default_tolerance: 0.0
@@ -22,6 +23,7 @@ NavfnROS:
   planner_window_y: 0.0
   # debug
   visualize_potential: false
+
 GlobalPlanner:
   allow_unknown: true
   default_tolerance: 0.0
@@ -32,31 +34,49 @@ GlobalPlanner:
 # Local planner
 controller_frequency: 10.0
 controller_patience: 15.0
+
 TrajectoryPlannerROS:
-  # base vel/accel profile is in robot folders
   # tolerances (defaults)
-  yaw_goal_tolerance: 0.1
-  xy_goal_tolerance: 0.1
-  latch_xy_goal_tolerance: true
+  yaw_goal_tolerance: 0.25
+  xy_goal_tolerance: 0.25
+  latch_xy_goal_tolerance: false
+
+  # base vel/accel profile is in robot folders
+  acc_lim_x: 0.5
+  acc_lim_y: 0.0
+  acc_lim_theta: 1.5
+  max_vel_x: 0.75
+  min_vel_x: 0.2
+  max_vel_y: 0.0
+  min_vel_y: 0.0
+  max_vel_theta: 0.7
+  min_vel_theta: -0.7
+  min_in_place_vel_theta: 0.55
+  # escape_vel: -1.0
+  holonomic_robot: false
+
   # forward simulation
-  sim_time: 1.0
-  sim_granularity: 0.025
-  angular_sim_granularity: 0.025
-  vx_samples: 3
-  vtheta_samples: 10
+  sim_time: 2.5
+  sim_granularity: 0.25
+  angular_sim_granularity: 0.05
+  vx_samples: 12
+  vtheta_samples: 25
+
   # scoring (defaults)
   meter_scoring: true
-  pdist_scale: 8.0
-  gdist_scale: 12.0
-  occdist_scale: 0.1
+  pdist_scale: 0.5
+  gdist_scale: 5.0
+  occdist_scale: 1.0
   heading_lookahead: 0.325
   heading_scoring_timestep: 0.8
   heading_scoring: true
-  dwa: false
+  dwa: true
+
   # other
   oscillation_reset_dist: 0.05
   # debug
   publish_cost_grid_pc: false
+
 EBandPlannerROS:
   xy_goal_tolerance: 0.1
   yaw_goal_tolerance: 0.1
@@ -85,6 +105,7 @@ EBandPlannerROS:
   bubble_velocity_multiplier: 2.0
   rotation_threshold_multiplier: 1.0
   rotation_correction_threshold: 0.5
+
 TebLocalPlannerROS:
   xy_goal_tolerance: 0.1
   yaw_goal_tolerance: 0.1
