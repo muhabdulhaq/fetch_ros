@@ -1,8 +1,8 @@
 # Planner selection
 # base_global_planner: "navfn/NavfnROS"
 base_global_planner: "global_planner/GlobalPlanner"
-# base_local_planner: "base_local_planner/TrajectoryPlannerROS"
-base_local_planner: "eband_local_planner/EBandPlannerROS"
+base_local_planner: "base_local_planner/TrajectoryPlannerROS"
+# base_local_planner: "eband_local_planner/EBandPlannerROS"
 # base_local_planner: "teb_local_planner/TebLocalPlannerROS"
 
 # Recovery behaviors are defined in robot folders
@@ -12,7 +12,7 @@ oscillation_timeout: 10.0
 oscillation_distance: 0.5
 
 # Global planner
-planner_frequency: 0.0
+planner_frequency: 0.1
 planner_patience: 5.0
 
 NavfnROS:
@@ -48,10 +48,9 @@ TrajectoryPlannerROS:
   min_vel_x: 0.2
   max_vel_y: 0.0
   min_vel_y: 0.0
-  max_vel_theta: 0.7
-  min_vel_theta: -0.7
-  min_in_place_vel_theta: 0.55
-  # escape_vel: -1.0
+  max_vel_theta: 2.5
+  min_vel_theta: -2.5
+  min_in_place_vel_theta: 2.0
   holonomic_robot: false
   # forward simulation
   sim_time: 2.5
@@ -63,7 +62,7 @@ TrajectoryPlannerROS:
   meter_scoring: true
   pdist_scale: 0.5
   gdist_scale: 5.0
-  occdist_scale: 1.0
+  occdist_scale: 0.1
   heading_lookahead: 0.325
   heading_scoring_timestep: 0.8
   heading_scoring: true
